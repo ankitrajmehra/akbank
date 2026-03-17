@@ -1,0 +1,32 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<div style="background:white;border-radius:12px;padding:32px;
+            max-width:500px;margin:auto;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+
+    <h2 style="color:green">💰 Deposit Amount</h2>
+    <p><b>Account No:</b> {{ account.account_no }}</p>
+    <p><b>Name:</b> {{ account.name }}</p>
+    <p><b>Current Balance:</b> 
+        <span style="color:green;font-weight:bold">₹{{ account.balance }}</span>
+    </p>
+
+    <form method="POST" style="margin-top:20px">
+        {% csrf_token %}
+        <label><b>Amount:</b></label>
+        <input type="number" name="amount" required placeholder="Enter amount"
+            style="width:100%;padding:10px;margin:8px 0 20px;
+                   border:1px solid #ddd;border-radius:6px;font-size:16px">
+        <button type="submit"
+            style="background:green;color:white;padding:12px;border:none;
+                   border-radius:8px;cursor:pointer;width:100%;font-size:16px">
+            💰 Deposit Money
+        </button>
+    </form>
+    <a href="{% url 'bank:balance' %}"
+        style="display:block;text-align:center;margin-top:12px;color:gray">
+        ← Back
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<!-- User Info -->
+<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
+            color:white;padding:24px;border-radius:12px;
+            margin-bottom:24px">
+    <h2>🏦 Loan Apply Karo</h2>
+    <p>Account No: <b>{{ account.account_no }}</b> |
+       Balance: <b>₹{{ account.balance }}</b></p>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+    <!-- LOAN FORM -->
+    <div style="background:white;border-radius:12px;padding:28px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+        <h3 style="color:#1a73e8;margin-bottom:20px">📋 Naya Loan Apply</h3>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div style="margin-bottom:16px">
+                <label><b>Loan Type</b></label>
+                {{ form.loan_type }}
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label><b>Amount (₹)</b></label>
+                {{ form.amount }}
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label><b>Duration (Months)</b></label>
+                {{ form.duration_months }}
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label><b>Purpose</b></label>
+                {{ form.purpose }}
+            </div>
+
+            <button type="submit"
+                style="background:#1a73e8;color:white;padding:12px;
+                       border:none;border-radius:8px;cursor:pointer;
+                       width:100%;font-size:16px">
+                📨 Loan Apply Karo
+            </button>
+        </form>
+    </div>
+
+    <!-- LOAN TYPES INFO -->
+    <div>
+        <div style="background:white;border-radius:12px;padding:28px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    margin-bottom:16px">
+            <h3 style="color:#1a73e8;margin-bottom:16px">
+                💡 Loan Types
+            </h3>
+            <table style="width:100%;border-collapse:collapse">
+                <tr style="background:#f5f7fa">
+                    <th style="padding:10px;text-align:left">Type</th>
+                    <th style="padding:10px;text-align:left">Max Amount</th>
+                    <th style="padding:10px;text-align:left">Interest</th>
+                </tr>
+                <tr>
+                    <td style="padding:10px">🏠 Home Loan</td>
+                    <td style="padding:10px">₹50,00,000</td>
+                    <td style="padding:10px">8.5%</td>
+                </tr>
+                <tr style="background:#f5f7fa">
+                    <td style="padding:10px">🚗 Car Loan</td>
+                    <td style="padding:10px">₹10,00,000</td>
+                    <td style="padding:10px">9.5%</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px">👤 Personal Loan</td>
+                    <td style="padding:10px">₹5,00,000</td>
+                    <td style="padding:10px">12%</td>
+                </tr>
+                <tr style="background:#f5f7fa">
+                    <td style="padding:10px">🎓 Education Loan</td>
+                    <td style="padding:10px">₹20,00,000</td>
+                    <td style="padding:10px">7.5%</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px">💼 Business Loan</td>
+                    <td style="padding:10px">₹25,00,000</td>
+                    <td style="padding:10px">11%</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- MY LOANS -->
+<div style="background:white;border-radius:12px;padding:28px;
+            margin-top:24px;box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+    <h3 style="color:#1a73e8;margin-bottom:16px">📊 Mere Loans</h3>
+
+    {% if my_loans %}
+    <table style="width:100%;border-collapse:collapse">
+        <thead>
+            <tr style="background:#1a73e8;color:white">
+                <th style="padding:12px;text-align:left">Loan Type</th>
+                <th style="padding:12px;text-align:left">Amount</th>
+                <th style="padding:12px;text-align:left">Duration</th>
+                <th style="padding:12px;text-align:left">Purpose</th>
+                <th style="padding:12px;text-align:left">Status</th>
+                <th style="padding:12px;text-align:left">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in my_loans %}
+            <tr style="border-bottom:1px solid #eee">
+                <td style="padding:12px">{{ loan.get_loan_type_display }}</td>
+                <td style="padding:12px;font-weight:bold">
+                    ₹{{ loan.amount }}
+                </td>
+                <td style="padding:12px">{{ loan.duration_months }} months</td>
+                <td style="padding:12px">{{ loan.purpose }}</td>
+                <td style="padding:12px">
+                    {% if loan.status == 'pending' %}
+                        <span style="background:#fff3cd;color:#856404;
+                                     padding:4px 10px;border-radius:12px;
+                                     font-size:12px">
+                            ⏳ Pending
+                        </span>
+                    {% elif loan.status == 'approved' %}
+                        <span style="background:#d4edda;color:green;
+                                     padding:4px 10px;border-radius:12px;
+                                     font-size:12px">
+                            ✅ Approved
+                        </span>
+                    {% else %}
+                        <span style="background:#fce8e6;color:red;
+                                     padding:4px 10px;border-radius:12px;
+                                     font-size:12px">
+                            ❌ Rejected
+                        </span>
+                    {% endif %}
+                </td>
+                <td style="padding:12px;color:gray;font-size:13px">
+                   {{ t.date|date:"d M Y" }} {{ t.date|time:"h:i A" }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <div style="text-align:center;padding:40px;color:gray">
+        <div style="font-size:48px">📋</div>
+        <p>Abhi tak koi loan apply nahi kiya!</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

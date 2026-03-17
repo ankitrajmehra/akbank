@@ -1,0 +1,82 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<!-- User Info Card -->
+<div style="background:#1a73e8;color:white;padding:24px;
+            border-radius:12px;margin-bottom:24px">
+    <h2>👤 Welcome, {{ current_user.email }}!</h2>
+    <p style="opacity:0.8">Aapke saare accounts neeche hain</p>
+</div>
+
+{% if accounts %}
+
+    <!-- Total Balance Card -->
+    {% with total=0 %}
+    <div style="background:#e6f4ea;padding:20px;border-radius:12px;
+                margin-bottom:24px;text-align:center">
+        <h3 style="color:green">💰 Aapke Accounts</h3>
+    </div>
+    {% endwith %}
+
+    <!-- Account Cards -->
+    {% for acc in accounts %}
+    <div style="background:white;border-radius:12px;padding:24px;
+                margin-bottom:16px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                border-left:5px solid #1a73e8">
+
+        <div style="display:flex;justify-content:space-between;
+                    align-items:center">
+            <div>
+                <h3 style="color:#1a73e8;margin:0">
+                    🏦 {{ acc.account_no }}
+                </h3>
+                <p style="margin:6px 0">
+                    <b>👤 Name:</b> {{ acc.name }}
+                </p>
+                <p style="margin:6px 0">
+                    <b>📋 Type:</b> {{ acc.account_type }}
+                </p>
+                <p style="margin:6px 0">
+                    <b>🏢 Branch:</b> {{ acc.branch }}
+                </p>
+            </div>
+            <div style="text-align:center;
+                        background:#e6f4ea;
+                        padding:20px;
+                        border-radius:12px">
+                <p style="color:gray;margin:0;font-size:12px">
+                    BALANCE
+                </p>
+                <h2 style="color:green;margin:4px 0">
+                    ₹{{ acc.balance }}
+                </h2>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+{% else %}
+    <!-- Not Valid -->
+    <div style="background:#fce8e6;padding:40px;border-radius:12px;
+                text-align:center">
+        <h2 style="color:red">⚠️ Not Valid!</h2>
+        <p style="color:#666">Aapka koi bank account nahi hai!</p>
+        <a href="{% url 'bank:account' %}"
+           style="background:#1a73e8;color:white;padding:12px 24px;
+                  border-radius:8px;text-decoration:none;
+                  display:inline-block;margin-top:12px">
+            ➕ Account Banao
+        </a>
+    </div>
+{% endif %}
+
+<br>
+<a href="{% url 'bank:index' %}"
+   style="background:#f0f4ff;color:#1a73e8;padding:10px 20px;
+          border-radius:6px;text-decoration:none">
+    🏠 Home
+</a>
+
+{% endblock %}

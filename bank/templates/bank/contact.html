@@ -1,0 +1,232 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
+            color:white;padding:40px;text-align:center;
+            border-radius:16px;margin-bottom:32px">
+    <h1 style="font-size:36px;margin:0">📞 Contact Us</h1>
+    <p style="font-size:16px;opacity:0.9;margin-top:8px">
+        Hum aapki madad ke liye hamesha taiyar hain!
+    </p>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+    <!-- LEFT — CONTACT INFO -->
+    <div>
+
+        <!-- Phone -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    margin-bottom:16px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid #1a73e8;
+                    display:flex;align-items:center;gap:16px">
+            <div style="font-size:40px">📱</div>
+            <div>
+                <p style="color:gray;font-size:12px;
+                           text-transform:uppercase;
+                           letter-spacing:1px;margin:0">
+                    Phone Number
+                </p>
+                <h3 style="color:#1a73e8;margin:4px 0;font-size:22px">
+                    +91 7859076181
+                </h3>
+                <p style="color:gray;font-size:13px;margin:0">
+                    Mon-Sat: 9:00 AM - 6:00 PM
+                </p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    margin-bottom:16px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid green;
+                    display:flex;align-items:center;gap:16px">
+            <div style="font-size:40px">📧</div>
+            <div>
+                <p style="color:gray;font-size:12px;
+                           text-transform:uppercase;
+                           letter-spacing:1px;margin:0">
+                    Email Address
+                </p>
+                <h3 style="color:green;margin:4px 0;font-size:18px">
+                    ankitkumarbkm2021@gmail.com
+                </h3>
+                <p style="color:gray;font-size:13px;margin:0">
+                    24/7 Email Support
+                </p>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    margin-bottom:16px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid orange;
+                    display:flex;align-items:center;gap:16px">
+            <div style="font-size:40px">📍</div>
+            <div>
+                <p style="color:gray;font-size:12px;
+                           text-transform:uppercase;
+                           letter-spacing:1px;margin:0">
+                    Branch Address
+                </p>
+                <h3 style="color:orange;margin:4px 0;font-size:18px">
+                    AK Bank, Jaipur
+                </h3>
+                <p style="color:gray;font-size:13px;margin:0">
+                    Rajasthan, India — 302001
+                </p>
+            </div>
+        </div>
+
+        <!-- Timing -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid purple">
+            <h3 style="color:purple;margin-bottom:16px">
+                🕐 Bank Timing
+            </h3>
+            <table style="width:100%;border-collapse:collapse">
+                <tr style="border-bottom:1px solid #eee">
+                    <td style="padding:8px;color:gray">Monday - Friday</td>
+                    <td style="padding:8px;font-weight:bold;color:#1a73e8">
+                        9:00 AM - 5:00 PM
+                    </td>
+                </tr>
+                <tr style="border-bottom:1px solid #eee">
+                    <td style="padding:8px;color:gray">Saturday</td>
+                    <td style="padding:8px;font-weight:bold;color:#1a73e8">
+                        9:00 AM - 2:00 PM
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;color:gray">Sunday</td>
+                    <td style="padding:8px;font-weight:bold;color:red">
+                        ❌ Closed
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- RIGHT — CONTACT FORM -->
+    <div style="background:white;border-radius:12px;padding:28px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+        <h3 style="color:#1a73e8;margin-bottom:20px">
+            ✉️ Message Bhejo
+        </h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#333">
+                    👤 Aapka Naam
+                </label>
+                <input type="text" name="name" required
+                    placeholder="Full Name"
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:15px;box-sizing:border-box">
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#333">
+                    📧 Email Address
+                </label>
+                <input type="email" name="email" required
+                    placeholder="aapka@email.com"
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:15px;box-sizing:border-box">
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#333">
+                    📱 Phone Number
+                </label>
+                <input type="tel" name="phone"
+                    placeholder="+91 XXXXXXXXXX"
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:15px;box-sizing:border-box">
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#333">
+                    📋 Subject
+                </label>
+                <select name="subject"
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:15px;box-sizing:border-box">
+                    <option>Account Related</option>
+                    <option>Loan Enquiry</option>
+                    <option>Deposit/Withdraw</option>
+                    <option>Complaint</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom:20px">
+                <label style="font-weight:bold;color:#333">
+                    💬 Message
+                </label>
+                <textarea name="message" required rows="4"
+                    placeholder="Aapka message yahan likho..."
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:15px;box-sizing:border-box;
+                           resize:vertical"></textarea>
+            </div>
+
+            <button type="submit"
+                style="background:#1a73e8;color:white;padding:14px;
+                       border:none;border-radius:8px;cursor:pointer;
+                       width:100%;font-size:16px;font-weight:bold">
+                📨 Message Bhejo
+            </button>
+        </form>
+
+        {% if success %}
+        <div style="background:#d4edda;color:green;padding:16px;
+                    border-radius:8px;margin-top:16px;text-align:center">
+            ✅ Message successfully bhej diya gaya!
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!-- BOTTOM — SOCIAL LINKS -->
+<div style="background:white;border-radius:12px;padding:28px;
+            margin-top:24px;text-align:center;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+    <h3 style="color:#1a73e8;margin-bottom:20px">
+        🌐 Humse Judo
+    </h3>
+    <div style="display:flex;justify-content:center;gap:16px">
+        <a href="tel:7859076181"
+           style="background:#1a73e8;color:white;padding:12px 24px;
+                  border-radius:8px;text-decoration:none;font-weight:bold">
+            📱 Call Karo
+        </a>
+        <a href="mailto:ankitkumarbkm2021@gmail.com"
+           style="background:green;color:white;padding:12px 24px;
+                  border-radius:8px;text-decoration:none;font-weight:bold">
+            📧 Email Karo
+        </a>
+        <a href="https://wa.me/917859076181"
+           style="background:#25D366;color:white;padding:12px 24px;
+                  border-radius:8px;text-decoration:none;font-weight:bold">
+            💬 WhatsApp
+        </a>
+    </div>
+</div>
+
+{% endblock %}

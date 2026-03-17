@@ -1,0 +1,243 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<!-- HERO -->
+<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
+            color:white;padding:60px 40px;text-align:center;
+            border-radius:16px;margin-bottom:32px">
+    <h1 style="font-size:42px;margin:0">💬 Suggestion Box</h1>
+    <p style="font-size:18px;margin-top:12px;opacity:0.9">
+        Aapki Raay Hamein Behtar Banati Hai!
+    </p>
+</div>
+
+<!-- SUGGESTION FORM -->
+<div style="display:grid;grid-template-columns:1fr 1fr;
+            gap:24px;margin-bottom:32px">
+
+    <!-- FORM -->
+    <div style="background:white;border-radius:16px;padding:32px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+        <h2 style="color:#1a73e8;margin-bottom:20px">
+            📝 Apni Suggestion Do
+        </h2>
+
+        {% if success %}
+        <div style="background:#d4edda;color:green;padding:14px;
+                    border-radius:8px;margin-bottom:16px;font-weight:bold">
+            ✅ Aapki suggestion submit ho gayi! Shukriya!
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#555">
+                    👤 Aapka Naam
+                </label>
+                <input type="text" name="name" required
+                    placeholder="Apna naam likho..."
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:14px;box-sizing:border-box">
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#555">
+                    📧 Email
+                </label>
+                <input type="email" name="email" required
+                    placeholder="Email address..."
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:14px;box-sizing:border-box">
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#555">
+                    📋 Category
+                </label>
+                <select name="category"
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:14px;box-sizing:border-box">
+                    <option value="service">💼 Service</option>
+                    <option value="loan">🏠 Loan</option>
+                    <option value="deposit">💰 Deposit</option>
+                    <option value="withdraw">💸 Withdraw</option>
+                    <option value="website">🌐 Website</option>
+                    <option value="other">📌 Other</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-weight:bold;color:#555">
+                    ⭐ Rating
+                </label>
+                <div style="margin-top:8px;display:flex;gap:12px">
+                    <label style="cursor:pointer">
+                        <input type="radio" name="rating" value="5" checked>
+                        ⭐⭐⭐⭐⭐ Excellent
+                    </label>
+                </div>
+                <div style="margin-top:6px;display:flex;gap:12px">
+                    <label style="cursor:pointer">
+                        <input type="radio" name="rating" value="4">
+                        ⭐⭐⭐⭐ Good
+                    </label>
+                </div>
+                <div style="margin-top:6px;display:flex;gap:12px">
+                    <label style="cursor:pointer">
+                        <input type="radio" name="rating" value="3">
+                        ⭐⭐⭐ Average
+                    </label>
+                </div>
+                <div style="margin-top:6px;display:flex;gap:12px">
+                    <label style="cursor:pointer">
+                        <input type="radio" name="rating" value="2">
+                        ⭐⭐ Poor
+                    </label>
+                </div>
+                <div style="margin-top:6px;display:flex;gap:12px">
+                    <label style="cursor:pointer">
+                        <input type="radio" name="rating" value="1">
+                        ⭐ Very Poor
+                    </label>
+                </div>
+            </div>
+
+            <div style="margin-bottom:20px">
+                <label style="font-weight:bold;color:#555">
+                    💬 Aapki Suggestion
+                </label>
+                <textarea name="message" required rows="5"
+                    placeholder="Apni suggestion ya feedback yahan likho..."
+                    style="width:100%;padding:12px;margin-top:6px;
+                           border:1.5px solid #ddd;border-radius:8px;
+                           font-size:14px;box-sizing:border-box;
+                           resize:vertical"></textarea>
+            </div>
+
+            <button type="submit"
+                style="background:#1a73e8;color:white;padding:14px;
+                       border:none;border-radius:8px;cursor:pointer;
+                       width:100%;font-size:16px;font-weight:bold">
+                📨 Submit Suggestion
+            </button>
+        </form>
+    </div>
+
+    <!-- RIGHT SIDE INFO -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+
+        <!-- WHY SUGGEST -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid #1a73e8">
+            <h3 style="color:#1a73e8;margin-bottom:12px">
+                🌟 Suggestion Kyun Dein?
+            </h3>
+            <ul style="color:#555;line-height:2.2;padding-left:18px">
+                <li>Aapki raay se hum improve karte hain</li>
+                <li>Har suggestion par dhyan diya jata hai</li>
+                <li>Behtar services ka mauka milta hai</li>
+                <li>Aap bank ka hissa ban jaate hain</li>
+            </ul>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid green">
+            <h3 style="color:green;margin-bottom:16px">
+                📞 Direct Contact
+            </h3>
+            <p style="color:#555;margin-bottom:10px">
+                📞 <b>Phone:</b> 7859-0761-81
+            </p>
+            <p style="color:#555;margin-bottom:10px">
+                📧 <b>Email:</b> ankitkumar2021@gmail.com
+            </p>
+            <p style="color:#555;margin-bottom:10px">
+                🕐 <b>Timing:</b> Mon-Sat 9AM - 6PM
+            </p>
+            <p style="color:#555">
+                🏢 <b>Address:</b> AK Bank HQ, Jaipur
+            </p>
+        </div>
+
+        <!-- STATS -->
+        <div style="background:white;border-radius:12px;padding:24px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                    border-left:5px solid orange">
+            <h3 style="color:orange;margin-bottom:16px">
+                📊 Hamara Record
+            </h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div style="text-align:center;background:#f5f7fa;
+                            padding:16px;border-radius:8px">
+                    <div style="font-size:24px;font-weight:bold;color:#1a73e8">
+                        98%
+                    </div>
+                    <div style="color:gray;font-size:12px;margin-top:4px">
+                        Customer Satisfied
+                    </div>
+                </div>
+                <div style="text-align:center;background:#f5f7fa;
+                            padding:16px;border-radius:8px">
+                    <div style="font-size:24px;font-weight:bold;color:green">
+                        24hrs
+                    </div>
+                    <div style="color:gray;font-size:12px;margin-top:4px">
+                        Response Time
+                    </div>
+                </div>
+                <div style="text-align:center;background:#f5f7fa;
+                            padding:16px;border-radius:8px">
+                    <div style="font-size:24px;font-weight:bold;color:orange">
+                        5000+
+                    </div>
+                    <div style="color:gray;font-size:12px;margin-top:4px">
+                        Suggestions Received
+                    </div>
+                </div>
+                <div style="text-align:center;background:#f5f7fa;
+                            padding:16px;border-radius:8px">
+                    <div style="font-size:24px;font-weight:bold;color:purple">
+                        95%
+                    </div>
+                    <div style="color:gray;font-size:12px;margin-top:4px">
+                        Issues Resolved
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
+            color:white;padding:40px;text-align:center;
+            border-radius:16px;margin-bottom:32px">
+    <h2 style="margin:0">🤝 Hum Milke Behtar Banayenge!</h2>
+    <p style="opacity:0.9;margin-top:8px">
+        Aapki har suggestion hamare liye important hai
+    </p>
+    <div style="margin-top:20px;display:flex;gap:16px;justify-content:center">
+        <a href="{% url 'bank:index' %}"
+           style="background:white;color:#1a73e8;padding:12px 28px;
+                  border-radius:8px;text-decoration:none;font-weight:bold">
+            🏠 Home
+        </a>
+        <a href="{% url 'bank:contact' %}"
+           style="background:transparent;color:white;padding:12px 28px;
+                  border-radius:8px;text-decoration:none;font-weight:bold;
+                  border:2px solid white">
+            📞 Contact Karo
+        </a>
+    </div>
+</div>
+
+{% endblock %}

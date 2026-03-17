@@ -1,0 +1,312 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    .auth-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 85vh;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        margin: 20px auto;
+        max-width: 1000px;
+    }
+
+    .auth-left {
+        background: linear-gradient(135deg, #1b5e20, #2e7d32, #43a047);
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .auth-left::before {
+        content: '';
+        position: absolute;
+        top: -80px; right: -80px;
+        width: 300px; height: 300px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 50%;
+    }
+
+    .bank-logo {
+        font-size: 64px;
+        margin-bottom: 20px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .auth-left h1 {
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .auth-left p {
+        color: rgba(255,255,255,0.85);
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 28px;
+    }
+
+    .steps-list {
+        list-style: none;
+        text-align: left;
+        width: 100%;
+    }
+
+    .steps-list li {
+        color: rgba(255,255,255,0.9);
+        padding: 12px 0;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .step-num {
+        background: rgba(255,255,255,0.2);
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .auth-right {
+        background: white;
+        padding: 50px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .auth-right h2 {
+        font-family: 'Poppins', sans-serif;
+        color: #1b5e20;
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .auth-right p.subtitle {
+        color: #888;
+        font-size: 13px;
+        margin-bottom: 28px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+        position: relative;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 13px 16px 13px 44px;
+        border: 2px solid #e8e8e8;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        background: #fafafa;
+    }
+
+    .form-group input:focus {
+        border-color: #2e7d32;
+        background: white;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(46,125,50,0.1);
+    }
+
+    .form-group .icon {
+        position: absolute;
+        left: 14px;
+        top: 38px;
+        font-size: 17px;
+    }
+
+    .btn-register {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-register:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(46,125,50,0.4);
+    }
+
+    .error-box {
+        background: #fce8e6;
+        color: #c62828;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border-left: 4px solid #e53935;
+    }
+
+    .success-box {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        border-left: 4px solid #2e7d32;
+    }
+
+    .terms {
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+        margin-top: 16px;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="auth-container">
+
+    <!-- LEFT — INFO -->
+    <div class="auth-left">
+        <div class="bank-logo">🏦</div>
+        <h1>AK Bank Join Karein!</h1>
+        <p>
+            3 simple steps mein apna<br>
+            bank account kholein!
+        </p>
+        <ul class="steps-list">
+            <li>
+                <span class="step-num">1</span>
+                Email aur password se register karein
+            </li>
+            <li>
+                <span class="step-num">2</span>
+                Login karke apna bank account kholein
+            </li>
+            <li>
+                <span class="step-num">3</span>
+                Deposit, Withdraw, Loan sab enjoy karein!
+            </li>
+        </ul>
+
+        <div style="margin-top:28px;background:rgba(255,255,255,0.1);
+                    border-radius:12px;padding:16px;width:100%">
+            <p style="color:white;font-size:13px;margin:0;text-align:center">
+                🎁 <b>New Customer Offer!</b><br>
+                <span style="opacity:0.85">Zero account opening charges!</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- RIGHT — SIGNUP FORM -->
+    <div class="auth-right">
+        <h2>Naya Account Kholein 🏦</h2>
+        <p class="subtitle">
+            AK Bank family mein swagat hai!
+        </p>
+
+        {% if error %}
+        <div class="error-box">❌ {{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <span class="icon">📧</span>
+                <input type="email" name="email" required
+                    placeholder="apni@email.com">
+            </div>
+
+            <div class="form-group">
+                <label>Password Banayein</label>
+                <span class="icon">🔒</span>
+                <input type="password" name="password" required
+                    placeholder="Strong password...">
+            </div>
+
+            <button type="submit" class="btn-register">
+                ✅ Register Karein — Free!
+            </button>
+        </form>
+
+        <p class="terms">
+            Register karke aap hamare
+            <a href="#" style="color:#2e7d32">Terms & Conditions</a>
+            aur
+            <a href="#" style="color:#2e7d32">Privacy Policy</a>
+            se agree karte hain.
+        </p>
+
+        <p style="text-align:center;color:#888;
+                  font-size:14px;margin-top:16px">
+            Already registered?
+            <a href="{% url 'bank:signin' %}"
+               style="color:#1a73e8;font-weight:600;text-decoration:none">
+                Login Karein →
+            </a>
+        </p>
+
+        <div style="display:flex;gap:10px;
+                    margin-top:20px;justify-content:center">
+            <div style="background:#f5f7fa;border-radius:8px;
+                        padding:8px 12px;font-size:11px;color:#666;
+                        display:flex;align-items:center;gap:5px">
+                🔒 SSL Secured
+            </div>
+            <div style="background:#f5f7fa;border-radius:8px;
+                        padding:8px 12px;font-size:11px;color:#666;
+                        display:flex;align-items:center;gap:5px">
+                🛡️ RBI Approved
+            </div>
+            <div style="background:#f5f7fa;border-radius:8px;
+                        padding:8px 12px;font-size:11px;color:#666;
+                        display:flex;align-items:center;gap:5px">
+                ✅ Safe & Secure
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

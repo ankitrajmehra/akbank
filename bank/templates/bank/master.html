@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AK Bank</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:Arial,sans-serif; background:#f5f7fa; }
+
+        /* ── PUBLIC NAVBAR ── */
+        .public-navbar {
+            background:#0d47a1;
+            padding:0 32px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 8px rgba(0,0,0,0.3);
+        }
+        .public-navbar .brand {
+            color:white;
+            font-size:22px;
+            font-weight:bold;
+            text-decoration:none;
+            padding:16px 0;
+        }
+        .public-navbar .links {
+            display:flex;
+            gap:4px;
+            align-items:center;
+        }
+        .public-navbar .links a {
+            color:white;
+            text-decoration:none;
+            padding:10px 14px;
+            border-radius:6px;
+            font-size:14px;
+            transition:0.2s;
+        }
+        .public-navbar .links a:hover {
+            background:rgba(255,255,255,0.2);
+        }
+        .btn-signup-nav {
+            background:white !important;
+            color:#0d47a1 !important;
+            font-weight:bold !important;
+        }
+        .btn-signin-nav {
+            background:#1a73e8 !important;
+            color:white !important;
+            font-weight:bold !important;
+        }
+
+        /* ── DASHBOARD NAVBAR ── */
+        .dash-navbar {
+            background:#1a73e8;
+            padding:0 32px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 8px rgba(0,0,0,0.2);
+        }
+        .dash-navbar .brand {
+            color:white;
+            font-size:20px;
+            font-weight:bold;
+            text-decoration:none;
+            padding:14px 0;
+        }
+        .dash-navbar .links {
+            display:flex;
+            gap:4px;
+            align-items:center;
+        }
+        .dash-navbar .links a {
+            color:white;
+            text-decoration:none;
+            padding:10px 12px;
+            border-radius:6px;
+            font-size:13px;
+            transition:0.2s;
+        }
+        .dash-navbar .links a:hover {
+            background:rgba(255,255,255,0.2);
+        }
+        .btn-logout-nav {
+            background:#e53935 !important;
+            color:white !important;
+            font-weight:bold !important;
+            margin-left:8px;
+        }
+
+        .container {
+            max-width:1100px;
+            margin:32px auto;
+            padding:0 24px;
+        }
+    </style>
+</head>
+<body>
+
+{% if request.session.user_id %}
+<!-- ══════════════════════════════════════ -->
+<!-- LOGIN HAI — DASHBOARD NAVBAR -->
+<!-- ══════════════════════════════════════ -->
+<nav class="dash-navbar">
+    <a href="{% url 'bank:index' %}" class="brand">
+        🏦 AK Bank
+    </a>
+    <div class="links">
+        <a href="{% url 'bank:index' %}">📊 Dashboard</a>
+        <a href="{% url 'bank:account' %}">🏦 Account</a>
+        <a href="{% url 'bank:deposit' %}">💰 Deposit</a>
+        <a href="{% url 'bank:withdraw' %}">💸 Withdraw</a>
+        <a href="{% url 'bank:loan' %}">🏠 Loan</a>
+        <a href="{% url 'bank:transaction' %}">📋 Transaction</a>
+        <a href="{% url 'bank:balance' %}">📊 Balance</a>
+        <a href="{% url 'bank:logout' %}" class="btn-logout-nav">
+            🚪 Logout
+        </a>
+    </div>
+</nav>
+
+{% else %}
+<!-- ══════════════════════════════════════ -->
+<!-- LOGIN NAHI — PUBLIC NAVBAR -->
+<!-- ══════════════════════════════════════ -->
+<nav class="public-navbar">
+    <a href="{% url 'bank:index' %}" class="brand">
+        🏦 AK Bank
+    </a>
+    <div class="links">
+        <a href="{% url 'bank:index' %}">🏠 Home</a>
+        <a href="{% url 'bank:about' %}">ℹ️ About</a>
+        <a href="{% url 'bank:services' %}">💼 Services</a>
+        <a href="{% url 'bank:contact' %}">📞 Contact</a>
+        <a href="{% url 'bank:suggestion' %}">💬 Suggestion</a>
+        <a href="{% url 'bank:signin' %}" class="btn-signin-nav">
+            🔐 Signin
+        </a>
+        <a href="{% url 'bank:signup' %}" class="btn-signup-nav">
+            👤 Signup
+        </a>
+    </div>
+</nav>
+{% endif %}
+
+<!-- CONTENT -->
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

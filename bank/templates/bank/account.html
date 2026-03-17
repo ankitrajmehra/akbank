@@ -1,0 +1,116 @@
+{% extends 'bank/master.html' %}
+{% block content %}
+
+{% if not existing_account %}
+
+<!-- Naya user message -->
+<div style="background:#fff3cd;color:#856404;padding:16px;
+            border-radius:8px;margin-bottom:20px;
+            border-left:4px solid orange;font-size:15px">
+    ⚠️ <b>AK Bank mein aapka swagat hai!</b>
+    Apni banking services use karne ke liye
+    pehle apna bank account open karein.
+</div>
+
+{% endif %}
+
+
+{% if existing_account %}
+
+<div style="background:white;border-radius:12px;padding:28px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+            border-left:5px solid #1a73e8">
+
+    <h2 style="color:#1a73e8">✅ Aapka Account</h2>
+
+    <p><b>Account No:</b> {{ existing_account.account_no }}</p>
+    <p><b>Name:</b> {{ existing_account.name }}</p>
+    <p><b>Type:</b> {{ existing_account.account_type }}</p>
+    <p><b>Branch:</b> {{ existing_account.branch }}</p>
+
+    <p><b>Balance:</b>
+        <span style="color:green;font-weight:bold">
+            ₹{{ existing_account.balance }}
+        </span>
+    </p>
+
+    <div style="margin-top:16px;display:flex;gap:12px">
+
+        <a href="{% url 'bank:deposit' %}"
+           style="background:green;color:white;padding:10px 20px;
+                  border-radius:8px;text-decoration:none">
+            💰 Deposit
+        </a>
+
+        <a href="{% url 'bank:withdraw' %}"
+           style="background:red;color:white;padding:10px 20px;
+                  border-radius:8px;text-decoration:none">
+            💸 Withdraw
+        </a>
+
+        <a href="{% url 'bank:balance' %}"
+           style="background:#1a73e8;color:white;padding:10px 20px;
+                  border-radius:8px;text-decoration:none">
+            📊 Balance
+        </a>
+
+        <a href="{% url 'bank:index' %}"
+           style="background:#f0f4ff;color:#1a73e8;padding:10px 20px;
+                  border-radius:8px;text-decoration:none">
+            🏠 Dashboard
+        </a>
+
+    </div>
+</div>
+
+
+{% else %}
+
+<!-- Account Create Form -->
+
+<div style="background:white;border-radius:12px;padding:32px;
+            max-width:600px;margin:auto;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+
+    <h2 style="color:#1a73e8">🏦 Naya Bank Account Kholo</h2>
+
+    <form method="POST" style="margin-top:20px">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+        <div style="margin-bottom:16px">
+
+            <label style="font-weight:bold;color:#555;font-size:13px">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% if field.errors %}
+            <p style="color:red;font-size:12px">
+                {{ field.errors.0 }}
+            </p>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+        <button type="submit"
+            style="background:#1a73e8;color:white;padding:14px;
+                   border:none;border-radius:8px;cursor:pointer;
+                   width:100%;font-size:16px;font-weight:bold">
+
+            🏦 Account Banao
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
