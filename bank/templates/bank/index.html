@@ -257,4 +257,57 @@
 </div>
 
 {% endif %}
+<!-- FOOTER -->
+<footer style="background:#0d1b2a;color:#ccc;padding:40px 20px;
+               border-top:4px solid #1a73e8;margin-top:40px">
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);
+                gap:20px;max-width:1100px;margin:auto">
+
+        <!-- ABOUT -->
+        <div>
+            <h3 style="color:white;margin-bottom:10px">🏦 AK Bank</h3>
+            <p style="font-size:14px;line-height:1.7">
+                A trusted digital banking platform providing secure,
+                fast and reliable financial services across India.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div>
+            <h3 style="color:white;margin-bottom:10px">🔗 Quick Links</h3>
+            <ul style="list-style:none;padding:0;font-size:14px">
+                <li><a href="/" style="color:#ccc;text-decoration:none">Home</a></li>
+                <li><a href="{% url 'bank:about' %}" style="color:#ccc;text-decoration:none">About</a></li>
+                <li><a href="{% url 'bank:contact' %}" style="color:#ccc;text-decoration:none">Contact</a></li>
+                <li><a href="{% url 'bank:signup' %}" style="color:#ccc;text-decoration:none">Register</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div>
+            <h3 style="color:white;margin-bottom:10px">📞 Contact Info</h3>
+            <p style="font-size:14px;margin:6px 0">📱 7859076181</p>
+            <p style="font-size:14px;margin:6px 0">
+                📧 ankitkumarbkm2021@gmail.com
+            </p>
+            <p style="font-size:14px;margin:6px 0">
+                📍 Bikram, Patna, Bihar - 801104
+            </p>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM LINE -->
+    <div style="text-align:center;margin-top:30px;
+                border-top:1px solid #444;padding-top:20px">
+        <p style="font-size:14px;color:#aaa">
+            © 2026 AK Bank | Developed by <b style="color:white">@Ankit Kumar</b>
+        </p>
+        <p style="font-size:13px;color:#777;margin-top:6px">
+            Nisha Institute of Technology (NIT Class), Bikram, Patna
+        </p>
+    </div>
+
+</footer>
 {% endblock %}

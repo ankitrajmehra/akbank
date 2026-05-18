@@ -2,109 +2,138 @@
 <html>
 <head>
     <title>AK Bank</title>
+
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:Arial,sans-serif; background:#f5f7fa; }
 
-        /* ── PUBLIC NAVBAR ── */
-        .public-navbar {
-            background:#0d47a1;
-            padding:0 32px;
+        body {
+            font-family:Arial,sans-serif;
+            background:#f5f7fa;
+        }
+
+        /* ───────── NAVBAR COMMON ───────── */
+        .public-navbar, .dash-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             display:flex;
             justify-content:space-between;
             align-items:center;
-            box-shadow:0 2px 8px rgba(0,0,0,0.3);
+            padding:0 32px;
+            backdrop-filter: blur(10px);
+            box-shadow:0 2px 10px rgba(0,0,0,0.2);
         }
-        .public-navbar .brand {
+
+        /* PUBLIC */
+        .public-navbar {
+            background:rgba(13,71,161,0.95);
+        }
+
+        /* DASHBOARD */
+        .dash-navbar {
+            background:rgba(26,115,232,0.95);
+        }
+
+        .brand {
             color:white;
             font-size:22px;
             font-weight:bold;
             text-decoration:none;
             padding:16px 0;
         }
-        .public-navbar .links {
+
+        .links {
             display:flex;
-            gap:4px;
+            gap:6px;
             align-items:center;
         }
-        .public-navbar .links a {
+
+        .links a {
             color:white;
             text-decoration:none;
             padding:10px 14px;
             border-radius:6px;
             font-size:14px;
-            transition:0.2s;
+            transition:0.3s;
         }
-        .public-navbar .links a:hover {
+
+        .links a:hover {
             background:rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
+
         .btn-signup-nav {
             background:white !important;
             color:#0d47a1 !important;
-            font-weight:bold !important;
-        }
-        .btn-signin-nav {
-            background:#1a73e8 !important;
-            color:white !important;
-            font-weight:bold !important;
+            font-weight:bold;
         }
 
-        /* ── DASHBOARD NAVBAR ── */
-        .dash-navbar {
-            background:#1a73e8;
-            padding:0 32px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            box-shadow:0 2px 8px rgba(0,0,0,0.2);
-        }
-        .dash-navbar .brand {
-            color:white;
-            font-size:20px;
+        .btn-signin-nav {
+            background:#1a73e8 !important;
             font-weight:bold;
-            text-decoration:none;
-            padding:14px 0;
         }
-        .dash-navbar .links {
-            display:flex;
-            gap:4px;
-            align-items:center;
-        }
-        .dash-navbar .links a {
-            color:white;
-            text-decoration:none;
-            padding:10px 12px;
-            border-radius:6px;
-            font-size:13px;
-            transition:0.2s;
-        }
-        .dash-navbar .links a:hover {
-            background:rgba(255,255,255,0.2);
-        }
+
         .btn-logout-nav {
             background:#e53935 !important;
-            color:white !important;
-            font-weight:bold !important;
+            font-weight:bold;
             margin-left:8px;
         }
 
+        /* CONTAINER */
         .container {
             max-width:1100px;
             margin:32px auto;
             padding:0 24px;
         }
+
+        /* ───────── FOOTER ───────── */
+        footer {
+            background:#0d1b2a;
+            color:#ccc;
+            padding:40px 20px;
+            border-top:4px solid #1a73e8;
+            margin-top:40px;
+        }
+
+        .footer-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+            max-width:1100px;
+            margin:auto;
+        }
+
+        footer h3 {
+            color:white;
+            margin-bottom:10px;
+        }
+
+        footer p, footer a {
+            font-size:14px;
+            color:#ccc;
+            text-decoration:none;
+        }
+
+        footer a:hover {
+            color:white;
+        }
+
+        .footer-bottom {
+            text-align:center;
+            margin-top:30px;
+            border-top:1px solid #444;
+            padding-top:20px;
+        }
     </style>
 </head>
+
 <body>
 
 {% if request.session.user_id %}
-<!-- ══════════════════════════════════════ -->
-<!-- LOGIN HAI — DASHBOARD NAVBAR -->
-<!-- ══════════════════════════════════════ -->
+
+<!-- DASHBOARD NAVBAR -->
 <nav class="dash-navbar">
-    <a href="{% url 'bank:index' %}" class="brand">
-        🏦 AK Bank
-    </a>
+    <a href="{% url 'bank:index' %}" class="brand">🏦 AK Bank</a>
     <div class="links">
         <a href="{% url 'bank:index' %}">📊 Dashboard</a>
         <a href="{% url 'bank:account' %}">🏦 Account</a>
@@ -113,41 +142,70 @@
         <a href="{% url 'bank:loan' %}">🏠 Loan</a>
         <a href="{% url 'bank:transaction' %}">📋 Transaction</a>
         <a href="{% url 'bank:balance' %}">📊 Balance</a>
-        <a href="{% url 'bank:logout' %}" class="btn-logout-nav">
-            🚪 Logout
-        </a>
+        <a href="{% url 'bank:logout' %}" class="btn-logout-nav">🚪 Logout</a>
     </div>
 </nav>
 
 {% else %}
-<!-- ══════════════════════════════════════ -->
-<!-- LOGIN NAHI — PUBLIC NAVBAR -->
-<!-- ══════════════════════════════════════ -->
+
+<!-- PUBLIC NAVBAR -->
 <nav class="public-navbar">
-    <a href="{% url 'bank:index' %}" class="brand">
-        🏦 AK Bank
-    </a>
+    <a href="{% url 'bank:index' %}" class="brand">🏦 AK Bank</a>
     <div class="links">
         <a href="{% url 'bank:index' %}">🏠 Home</a>
         <a href="{% url 'bank:about' %}">ℹ️ About</a>
         <a href="{% url 'bank:services' %}">💼 Services</a>
         <a href="{% url 'bank:contact' %}">📞 Contact</a>
         <a href="{% url 'bank:suggestion' %}">💬 Suggestion</a>
-        <a href="{% url 'bank:signin' %}" class="btn-signin-nav">
-            🔐 Signin
-        </a>
-        <a href="{% url 'bank:signup' %}" class="btn-signup-nav">
-            👤 Signup
-        </a>
+        <a href="{% url 'bank:signin' %}" class="btn-signin-nav">🔐 Signin</a>
+        <a href="{% url 'bank:signup' %}" class="btn-signup-nav">👤 Signup</a>
     </div>
 </nav>
+
 {% endif %}
 
 <!-- CONTENT -->
 <div class="container">
     {% block content %}
-    {% endblock %}
 </div>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <h3>🏦 AK Bank</h3>
+            <p>
+                A trusted digital banking platform providing secure,
+                fast and reliable financial services across India.
+            </p>
+        </div>
+
+        <div>
+            <h3>🔗 Quick Links</h3>
+            <p><a href="/">Home</a></p>
+            <p><a href="{% url 'bank:about' %}">About</a></p>
+            <p><a href="{% url 'bank:contact' %}">Contact</a></p>
+            <p><a href="{% url 'bank:signup' %}">Register</a></p>
+        </div>
+
+        <div>
+            <h3>📞 Contact Info</h3>
+            <p>📱 7859076181</p>
+            <p>📧 ankitkumarbkm2021@gmail.com</p>
+            <p>📍 Bikram, Patna, Bihar - 801104</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 AK Bank | Developed by <b>@Ankit Kumar</b></p>
+        <p>Nisha Institute of Technology (NIT Class), Bikram, Patna</p>
+    </div>
+
+</footer>
 
 </body>
 </html>
+{% endblock %}
