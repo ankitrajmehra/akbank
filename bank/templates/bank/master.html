@@ -133,9 +133,9 @@
 
 <!-- DASHBOARD NAVBAR -->
 <nav class="dash-navbar">
-    <a href="{% url 'bank:index' %}" class="brand">🏦 AK Bank</a>
+    <a href="/" class="brand">🏦 AK Bank</a>
     <div class="links">
-        <a href="{% url 'bank:index' %}">📊 Dashboard</a>
+        <a href="/">📊 Dashboard</a>
         <a href="{% url 'bank:account' %}">🏦 Account</a>
         <a href="{% url 'bank:deposit' %}">💰 Deposit</a>
         <a href="{% url 'bank:withdraw' %}">💸 Withdraw</a>
@@ -150,62 +150,11 @@
 
 <!-- PUBLIC NAVBAR -->
 <nav class="public-navbar">
-    <a href="{% url 'bank:index' %}" class="brand">🏦 AK Bank</a>
+    <a href="/" class="brand">🏦 AK Bank</a>
     <div class="links">
-        <a href="{% url 'bank:index' %}">🏠 Home</a>
+        <a href="/">🏠 Home</a>
         <a href="{% url 'bank:about' %}">ℹ️ About</a>
-        <a href="{% url 'bank:services' %}">💼 Services</a>
         <a href="{% url 'bank:contact' %}">📞 Contact</a>
-        <a href="{% url 'bank:suggestion' %}">💬 Suggestion</a>
         <a href="{% url 'bank:signin' %}" class="btn-signin-nav">🔐 Signin</a>
         <a href="{% url 'bank:signup' %}" class="btn-signup-nav">👤 Signup</a>
     </div>
-</nav>
-
-{% endif %}
-
-<!-- CONTENT -->
-<div class="container">
-    {% block content %}
-</div>
-
-<!-- FOOTER -->
-<footer>
-
-    <div class="footer-grid">
-
-        <div>
-            <h3>🏦 AK Bank</h3>
-            <p>
-                A trusted digital banking platform providing secure,
-                fast and reliable financial services across India.
-            </p>
-        </div>
-
-        <div>
-            <h3>🔗 Quick Links</h3>
-            <p><a href="/">Home</a></p>
-            <p><a href="{% url 'bank:about' %}">About</a></p>
-            <p><a href="{% url 'bank:contact' %}">Contact</a></p>
-            <p><a href="{% url 'bank:signup' %}">Register</a></p>
-        </div>
-
-        <div>
-            <h3>📞 Contact Info</h3>
-            <p>📱 7859076181</p>
-            <p>📧 ankitkumarbkm2021@gmail.com</p>
-            <p>📍 Bikram, Patna, Bihar - 801104</p>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <p>© 2026 AK Bank | Developed by <b>@Ankit Kumar</b></p>
-        <p>Nisha Institute of Technology (NIT Class), Bikram, Patna</p>
-    </div>
-
-</footer>
-
-</body>
-</html>
-{% endblock %}
