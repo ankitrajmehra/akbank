@@ -52,9 +52,17 @@ def contact(request):
     return render(request, 'bank/index.html')
 
 
+def services(request):
+    return render(request, 'bank/index.html')
+
+
+def suggestion(request):
+    return render(request, 'bank/index.html')
+
+
 urlpatterns = [
 
-    path('', home, name='index'),  # ✅ 'home' → 'index' kar diya
+    path('', home, name='index'),
 
     path('signup/', signup, name='signup'),
 
@@ -77,5 +85,9 @@ urlpatterns = [
     path('about/', about, name='about'),
 
     path('contact/', contact, name='contact'),
+
+    path('services/', services, name='services'),       # ✅ add kiya
+
+    path('suggestion/', suggestion, name='suggestion'), # ✅ add kiya
 
 ]
