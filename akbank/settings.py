@@ -1,13 +1,6 @@
 from pathlib import Path
 import os
-# pyrefly: ignore [missing-import]
 import dj_database_url
-
-try:
-    import pymysql
-    pymysql.install_as_MySQLdb()
-except ImportError:
-    pass
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,7 +29,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -51,12 +43,8 @@ ROOT_URLCONF = 'akbank.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
-        # templates folder detect karega
         'DIRS': [BASE_DIR / 'templates'],
-
         'APP_DIRS': True,
-
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -78,15 +66,8 @@ if _DATABASE_URL:
         'default': dj_database_url.parse(
             _DATABASE_URL,
             conn_max_age=600,
-            ssl_require=True,
         )
     }
-
-    DATABASES['default']['OPTIONS'] = {
-        'ssl': {'ca': None},
-        'charset': 'utf8mb4',
-    }
-
 else:
     DATABASES = {
         'default': {
