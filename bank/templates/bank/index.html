@@ -1,313 +1,87 @@
-{% extends 'bank/master.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AK Bank</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background:#f5f7fb;
+            font-family:Arial,sans-serif;
+        }
+    </style>
+</head>
+
+<body>
 
 {% if request.session.user_id %}
-<!-- ══════════════════════════════════════ -->
-<!-- DASHBOARD — LOGIN HAI -->
-<!-- ══════════════════════════════════════ -->
+
+<!-- DASHBOARD -->
 
 <div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
             color:white;padding:28px 32px;border-radius:16px;
-            margin-bottom:24px;display:flex;
+            margin:24px;display:flex;
             justify-content:space-between;align-items:center">
+
     <div>
-        <h2 style="margin:0">👋 Welcome, {{ request.session.user_name }}!</h2>
+        <h2 style="margin:0">
+            👋 Welcome, {{ request.session.user_name }}!
+        </h2>
+
         <p style="opacity:0.8;margin-top:6px">
             AK Bank Dashboard — Aapki Sabhi Services Yahan Hain
         </p>
     </div>
-    <a href="{% url 'bank:logout' %}"
-       style="background:rgba(255,255,255,0.2);color:white;
-              padding:10px 20px;border-radius:8px;text-decoration:none">
-        🚪 Logout
-    </a>
-</div>
-
-<!-- DASHBOARD CARDS -->
-<div style="display:grid;grid-template-columns:repeat(3,1fr);
-            gap:16px;margin-bottom:24px">
-
-    <a href="{% url 'bank:account' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid #1a73e8">
-        <div style="font-size:40px">🏦</div>
-        <h3 style="color:#1a73e8;margin:12px 0 8px">My Account</h3>
-        <p style="color:gray;font-size:13px">Account details dekho</p>
-    </div>
-    </a>
-
-    <a href="{% url 'bank:deposit' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid green">
-        <div style="font-size:40px">💰</div>
-        <h3 style="color:green;margin:12px 0 8px">Deposit</h3>
-        <p style="color:gray;font-size:13px">Paisa daalo</p>
-    </div>
-    </a>
-
-    <a href="{% url 'bank:withdraw' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid red">
-        <div style="font-size:40px">💸</div>
-        <h3 style="color:red;margin:12px 0 8px">Withdraw</h3>
-        <p style="color:gray;font-size:13px">Paisa nikalo</p>
-    </div>
-    </a>
-
-    <a href="{% url 'bank:balance' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid orange">
-        <div style="font-size:40px">📊</div>
-        <h3 style="color:orange;margin:12px 0 8px">Balance</h3>
-        <p style="color:gray;font-size:13px">Balance check karo</p>
-    </div>
-    </a>
-
-    <a href="{% url 'bank:loan' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid purple">
-        <div style="font-size:40px">🏠</div>
-        <h3 style="color:purple;margin:12px 0 8px">Loan</h3>
-        <p style="color:gray;font-size:13px">Loan apply karo</p>
-    </div>
-    </a>
-
-    <a href="{% url 'bank:transaction' %}" style="text-decoration:none">
-    <div style="background:white;border-radius:12px;padding:28px;
-                text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                border-top:4px solid teal">
-        <div style="font-size:40px">📋</div>
-        <h3 style="color:teal;margin:12px 0 8px">Transaction</h3>
-        <p style="color:gray;font-size:13px">History dekho</p>
-    </div>
-    </a>
 
 </div>
 
 {% else %}
-<!-- ══════════════════════════════════════ -->
-<!-- HOME PAGE — LOGIN NAHI -->
-<!-- ══════════════════════════════════════ -->
 
-<!-- HERO -->
+<!-- HOME PAGE -->
+
 <div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
             color:white;padding:60px 40px;text-align:center;
-            border-radius:16px;margin-bottom:32px">
-    <h1 style="font-size:42px;margin:0">🏦 AK Bank</h1>
+            border-radius:16px;margin:24px">
+
+    <h1 style="font-size:42px;margin:0">
+        🏦 AK Bank
+    </h1>
+
     <p style="font-size:18px;margin-top:12px;opacity:0.9">
         Aapka Bharosa, Hamari Zimmedari
     </p>
+
     <p style="font-size:14px;opacity:0.7;margin-top:6px">
         Since 2000 — Serving India with Trust
     </p>
-    <div style="margin-top:24px;display:flex;
-                gap:16px;justify-content:center">
-        <a href="{% url 'bank:signup' %}"
-           style="background:white;color:#1a73e8;padding:14px 28px;
-                  border-radius:8px;text-decoration:none;font-weight:bold">
-            👤 New Customer
-        </a>
-        <a href="{% url 'bank:signin' %}"
-           style="background:transparent;color:white;padding:14px 28px;
-                  border-radius:8px;text-decoration:none;font-weight:bold;
-                  border:2px solid white">
-            🔐 Login Karo
-        </a>
-    </div>
-</div>
 
-<!-- SIGNIN + SIGNUP FORMS -->
-<div style="display:grid;grid-template-columns:1fr 1fr;
-            gap:24px;margin-bottom:32px">
-
-    <!-- SIGNUP -->
-    <div style="background:white;border-radius:16px;padding:32px;
-                box-shadow:0 2px 8px rgba(0,0,0,0.1);
-                border-top:4px solid #1a73e8">
-        <h2 style="color:#1a73e8;margin-bottom:8px">
-            👤 New Customer
-        </h2>
-        <p style="color:gray;font-size:13px;margin-bottom:20px">
-            Pehli baar? AK Bank mein account banao!
-        </p>
-        <form method="POST" action="{% url 'bank:signup' %}">
-            {% csrf_token %}
-            <div style="margin-bottom:16px">
-                <label style="font-weight:bold;color:#555;font-size:12px">
-                    📧 EMAIL
-                </label>
-                <input type="email" name="email" required
-                    placeholder="apni@email.com"
-                    style="width:100%;padding:12px;margin-top:6px;
-                           border:1.5px solid #ddd;border-radius:8px;
-                           font-size:14px;box-sizing:border-box">
-            </div>
-            <div style="margin-bottom:20px">
-                <label style="font-weight:bold;color:#555;font-size:12px">
-                    🔒 PASSWORD
-                </label>
-                <input type="password" name="password" required
-                    placeholder="Password..."
-                    style="width:100%;padding:12px;margin-top:6px;
-                           border:1.5px solid #ddd;border-radius:8px;
-                           font-size:14px;box-sizing:border-box">
-            </div>
-            <button type="submit"
-                style="background:#1a73e8;color:white;padding:14px;
-                       border:none;border-radius:8px;cursor:pointer;
-                       width:100%;font-size:15px;font-weight:bold">
-                ✅ Register Karo
-            </button>
-        </form>
-        <p style="text-align:center;margin-top:12px;
-                  color:gray;font-size:13px">
-            Already registered?
-            <a href="{% url 'bank:signin' %}"
-               style="color:#1a73e8;font-weight:bold;text-decoration:none">
-                Login Karo →
-            </a>
-        </p>
-    </div>
-
-    <!-- SIGNIN -->
-    <div style="background:white;border-radius:16px;padding:32px;
-                box-shadow:0 2px 8px rgba(0,0,0,0.1);
-                border-top:4px solid green">
-        <h2 style="color:green;margin-bottom:8px">
-            🔐 Existing Customer
-        </h2>
-        <p style="color:gray;font-size:13px;margin-bottom:20px">
-            Apne account mein login karo!
-        </p>
-        <form method="POST" action="{% url 'bank:signin' %}">
-            {% csrf_token %}
-            <div style="margin-bottom:16px">
-                <label style="font-weight:bold;color:#555;font-size:12px">
-                    📧 EMAIL
-                </label>
-                <input type="email" name="email" required
-                    placeholder="apni@email.com"
-                    style="width:100%;padding:12px;margin-top:6px;
-                           border:1.5px solid #ddd;border-radius:8px;
-                           font-size:14px;box-sizing:border-box">
-            </div>
-            <div style="margin-bottom:20px">
-                <label style="font-weight:bold;color:#555;font-size:12px">
-                    🔒 PASSWORD
-                </label>
-                <input type="password" name="password" required
-                    placeholder="Password..."
-                    style="width:100%;padding:12px;margin-top:6px;
-                           border:1.5px solid #ddd;border-radius:8px;
-                           font-size:14px;box-sizing:border-box">
-            </div>
-            <button type="submit"
-                style="background:green;color:white;padding:14px;
-                       border:none;border-radius:8px;cursor:pointer;
-                       width:100%;font-size:15px;font-weight:bold">
-                🔐 Login Karo
-            </button>
-        </form>
-        <p style="text-align:center;margin-top:12px;
-                  color:gray;font-size:13px">
-            Naya account chahiye?
-            <a href="{% url 'bank:signup' %}"
-               style="color:green;font-weight:bold;text-decoration:none">
-                Signup Karo →
-            </a>
-        </p>
-    </div>
-</div>
-
-<!-- SERVICES PREVIEW -->
-<div style="display:grid;grid-template-columns:repeat(3,1fr);
-            gap:16px;margin-bottom:32px">
-    <div style="background:white;border-radius:12px;padding:20px;
-                text-align:center;
-                box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-        <div style="font-size:32px">🏦</div>
-        <h4 style="color:#1a73e8;margin:8px 0">Account Opening</h4>
-        <p style="color:gray;font-size:13px">
-            Online account kholo minutes mein
-        </p>
-    </div>
-    <div style="background:white;border-radius:12px;padding:20px;
-                text-align:center;
-                box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-        <div style="font-size:32px">💰</div>
-        <h4 style="color:green;margin:8px 0">Deposit/Withdraw</h4>
-        <p style="color:gray;font-size:13px">
-            Fast aur secure transactions
-        </p>
-    </div>
-    <div style="background:white;border-radius:12px;padding:20px;
-                text-align:center;
-                box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-        <div style="font-size:32px">🏠</div>
-        <h4 style="color:purple;margin:8px 0">Loan</h4>
-        <p style="color:gray;font-size:13px">
-            Low interest rate pe loan
-        </p>
-    </div>
 </div>
 
 {% endif %}
+
 <!-- FOOTER -->
+
 <footer style="background:#0d1b2a;color:#ccc;padding:40px 20px;
-               border-top:4px solid #1a73e8;margin-top:40px">
+               margin-top:40px">
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);
-                gap:20px;max-width:1100px;margin:auto">
+    <div style="text-align:center">
 
-        <!-- ABOUT -->
-        <div>
-            <h3 style="color:white;margin-bottom:10px">🏦 AK Bank</h3>
-            <p style="font-size:14px;line-height:1.7">
-                A trusted digital banking platform providing secure,
-                fast and reliable financial services across India.
-            </p>
-        </div>
+        <h3 style="color:white">
+            🏦 AK Bank
+        </h3>
 
-        <!-- QUICK LINKS -->
-        <div>
-            <h3 style="color:white;margin-bottom:10px">🔗 Quick Links</h3>
-            <ul style="list-style:none;padding:0;font-size:14px">
-                <li><a href="/" style="color:#ccc;text-decoration:none">Home</a></li>
-                <li><a href="{% url 'bank:about' %}" style="color:#ccc;text-decoration:none">About</a></li>
-                <li><a href="{% url 'bank:contact' %}" style="color:#ccc;text-decoration:none">Contact</a></li>
-                <li><a href="{% url 'bank:signup' %}" style="color:#ccc;text-decoration:none">Register</a></li>
-            </ul>
-        </div>
-
-        <!-- CONTACT -->
-        <div>
-            <h3 style="color:white;margin-bottom:10px">📞 Contact Info</h3>
-            <p style="font-size:14px;margin:6px 0">📱 7859076181</p>
-            <p style="font-size:14px;margin:6px 0">
-                📧 ankitkumarbkm2021@gmail.com
-            </p>
-            <p style="font-size:14px;margin:6px 0">
-                📍 Bikram, Patna, Bihar - 801104
-            </p>
-        </div>
-
-    </div>
-
-    <!-- BOTTOM LINE -->
-    <div style="text-align:center;margin-top:30px;
-                border-top:1px solid #444;padding-top:20px">
-        <p style="font-size:14px;color:#aaa">
-            © 2026 AK Bank | Developed by <b style="color:white">@Ankit Kumar</b>
+        <p>
+            © 2026 AK Bank | Developed by
+            <b style="color:white">@Ankit Kumar</b>
         </p>
-        <p style="font-size:13px;color:#777;margin-top:6px">
-            Nisha Institute of Technology (NIT Class), Bikram, Patna
-        </p>
+
     </div>
 
 </footer>
-{% endblock %}
+
+</body>
+</html>
