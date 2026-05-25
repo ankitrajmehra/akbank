@@ -1,87 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AK Bank</title>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK Bank</title>
 
     <style>
-        body{
+
+        *{
             margin:0;
             padding:0;
-            background:#f5f7fb;
+            box-sizing:border-box;
             font-family:Arial,sans-serif;
         }
+
+        body{
+            background:#f5f7fb;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            background:linear-gradient(135deg,#1a73e8,#0d47a1);
+            padding:16px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            color:white;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav .logo{
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        nav .links a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        nav .links a:hover{
+            opacity:0.8;
+        }
+
+        .container{
+            width:95%;
+            max-width:1200px;
+            margin:25px auto;
+        }
+
+        @media(max-width:768px){
+
+            nav{
+                flex-direction:column;
+                gap:10px;
+                text-align:center;
+            }
+
+        }
+
     </style>
+
 </head>
 
 <body>
 
-{% if request.session.user_id %}
+<nav>
 
-<!-- DASHBOARD -->
-
-<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
-            color:white;padding:28px 32px;border-radius:16px;
-            margin:24px;display:flex;
-            justify-content:space-between;align-items:center">
-
-    <div>
-        <h2 style="margin:0">
-            👋 Welcome, {{ request.session.user_name }}!
-        </h2>
-
-        <p style="opacity:0.8;margin-top:6px">
-            AK Bank Dashboard — Aapki Sabhi Services Yahan Hain
-        </p>
-    </div>
-
-</div>
-
-{% else %}
-
-<!-- HOME PAGE -->
-
-<div style="background:linear-gradient(135deg,#1a73e8,#0d47a1);
-            color:white;padding:60px 40px;text-align:center;
-            border-radius:16px;margin:24px">
-
-    <h1 style="font-size:42px;margin:0">
+    <div class="logo">
         🏦 AK Bank
-    </h1>
+    </div>
 
-    <p style="font-size:18px;margin-top:12px;opacity:0.9">
-        Aapka Bharosa, Hamari Zimmedari
-    </p>
+    <div class="links">
 
-    <p style="font-size:14px;opacity:0.7;margin-top:6px">
-        Since 2000 — Serving India with Trust
-    </p>
+        <a href="/">Home</a>
 
-</div>
+        <a href="{% url 'bank:signup' %}">
+            Register
+        </a>
 
-{% endif %}
+        <a href="{% url 'bank:signin' %}">
+            Login
+        </a>
 
-<!-- FOOTER -->
-
-<footer style="background:#0d1b2a;color:#ccc;padding:40px 20px;
-               margin-top:40px">
-
-    <div style="text-align:center">
-
-        <h3 style="color:white">
-            🏦 AK Bank
-        </h3>
-
-        <p>
-            © 2026 AK Bank | Developed by
-            <b style="color:white">@Ankit Kumar</b>
-        </p>
+        <a href="/admin/">
+            Admin
+        </a>
 
     </div>
 
-</footer>
+</nav>
+
+<div class="container">
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
 
 </body>
 </html>
