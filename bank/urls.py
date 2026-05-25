@@ -54,7 +54,7 @@ def contact(request):
 
 urlpatterns = [
 
-    path('', home, name='home'),
+    path('', home, name='index'),  # ✅ 'home' → 'index' kar diya
 
     path('signup/', signup, name='signup'),
 
